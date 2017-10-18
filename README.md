@@ -1,7 +1,7 @@
 # Overview
-This Terraform module creates EC2 instances into the provided subnets.
-The subnet defaults will determine if the instances get public ip address
-or not.
+This Terraform module creates an [Application Load Balancer](https://aws.amazon.com/elasticloadbalancing/)
+that can be configured to accept traffic only from specific origins, forwarding
+to specific EC2 instances.
 
 # Prerequisites
 * [Terraform](https://terraform.io/) installed and working

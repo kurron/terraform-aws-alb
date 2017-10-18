@@ -33,53 +33,27 @@ variable "freetext" {
     description = "Information that does not fit in the other tags"
 }
 
-variable "duty" {
+variable "internal" {
     type = "string"
-    description = "Special tag value used to locate specific running instances, e.g. Docker or Bastion"
-}
-
-variable "ami_regexp" {
-    type = "string"
-    description = "Regular expression to use when looking up an AMI in the specified region"
-}
-
-variable "ebs_optimized" {
-    type = "string"
-    description = "Boolean indicating if the instance should enable EBS optimization or not"
-}
-
-variable "instance_type" {
-    type = "string"
-    description = "They instance type to build the instances from"
-}
-
-variable "ssh_key_name" {
-    type = "string"
-    description = "Name of the SSH key to install onto the instances"
+    description = "If set to Yes, the load balancer can only be seen from inside the VPC, otherwise it is publicly available."
 }
 
 variable "security_group_ids" {
     type = "list"
-    description = "List of security groups to apply to the instances"
+    description = "List of security group IDs to apply to the balancer"
 }
 
 variable "subnet_ids" {
     type = "list"
-    description = "List of subnets to create the instances in"
+    description = "List of subnet IDs the balancer can access"
 }
 
-variable "instance_profile" {
+variable "s3_bucket" {
     type = "string"
-    description = "ID of the IAM profile to associate with the instances"
+    description = "S3 bucket to store the access logs in"
 }
 
-variable "scheduled" {
+variable "log_access" {
     type = "string"
-    description = "If set to Yes, the instances will be parked on a schedule"
-}
-
-variable "instance_limit" {
-    type = "string"
-    description = "A number indicating how many instances to create. A value of 0 creates one instance per subnet."
-    default = "0"
+    description = "If set to Yes, access logs will be written to S3, otherwise no logs are written."
 }
