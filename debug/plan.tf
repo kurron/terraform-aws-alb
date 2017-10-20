@@ -34,8 +34,6 @@ module "alb" {
     internal           = "No"
     security_group_ids = ["${data.terraform_remote_state.security-groups.alb_id}"]
     subnet_ids         = "${data.terraform_remote_state.vpc.public_subnet_ids}"
-    s3_bucket          = "transparent-test-access-logs"
-    log_access         = "No"
 }
 
 output "alb_id" {

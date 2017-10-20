@@ -47,13 +47,3 @@ variable "subnet_ids" {
     type = "list"
     description = "List of subnet IDs the balancer can access"
 }
-
-variable "s3_bucket" {
-    type = "string"
-    description = "S3 bucket to store the access logs in"
-}
-
-variable "log_access" {
-    type = "string"
-    description = "If set to Yes, access logs will be written to S3, otherwise no logs are written."
-}
