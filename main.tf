@@ -77,8 +77,9 @@ resource "aws_lb" "alb" {
         update = "10m"
         delete = "10m"
     }
-#    access_logs {
-#        bucket  = "${aws_s3_bucket.access_logs.id}"
-#        enabled = "false"
-#    }
+    access_logs {
+        bucket  = "${aws_s3_bucket.access_logs.id}"
+        enabled = "true"
+    }
+     depends_on = ["aws_s3_bucket_policy.alb_permissions"]
 }

@@ -8,7 +8,7 @@
                 "s3:PutObject"
             ],
             "Effect": "Allow",
-            "Resource": "arn:aws:s3:::${bucket_name}/AWSLogs/${billing_account}/*",
+            "Resource": "arn:aws:s3:::${bucket_name}/AWSLogs/*",
             "Principal": {
                 "AWS": [
                     "${service_account}"
