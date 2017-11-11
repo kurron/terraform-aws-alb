@@ -1,7 +1,9 @@
 # Overview
 This Terraform module creates an [Application Load Balancer](https://aws.amazon.com/elasticloadbalancing/)
-instance.  The balancer is empty and needs to have target groups and listeners attached
-to it.
+instance.  The balancer has listeners on ports 80 and 443, forwarding to two
+default target groups.  It is expected that those groups are never used but,
+instead, listener rules are used to forward traffic to groups added after the
+ALB's creation.
 
 # Prerequisites
 * [Terraform](https://terraform.io/) installed and working

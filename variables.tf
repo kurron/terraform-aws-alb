@@ -47,3 +47,18 @@ variable "subnet_ids" {
     type = "list"
     description = "List of subnet IDs the balancer can access"
 }
+
+variable "vpc_id" {
+    type = "string"
+    description = "The identifier of the VPC in which to create the target group."
+}
+
+variable "ssl_policy" {
+    type = "string"
+    description = "The name of the SSL Policy for the listener, e.g. ELBSecurityPolicy-TLS-1-2-2017-01"
+}
+
+variable "certificate_arn" {
+    type = "string"
+    description = "The ARN of the SSL server certificate"
+}

@@ -83,3 +83,67 @@ resource "aws_lb" "alb" {
     }
      depends_on = ["aws_s3_bucket_policy.alb_permissions"]
 }
+
+resource "aws_lb_target_group" "default_insecure_target" {
+    name_prefix          = "alb-"
+    port                 = "80"
+    protocol             = "HTTP"
+    vpc_id               = "${var.vpc_id}"
+    deregistration_delay = 300
+    stickiness {
+        type            = "lb_cookie"
+        cookie_duration = 86400
+        enabled         = "true"
+    }
+    tags {
+        Name        = "${var.name}"
+        Project     = "${var.project}"
+        Purpose     = "Default target for insecure HTTP traffic"
+        Creator     = "${var.creator}"
+        Environment = "${var.environment}"
+        Freetext    = "No instances typically get bound to this target"
+    }
+}
+
+resource "aws_lb_target_group" "default_secure_target" {
+    name_prefix          = "alb-"
+    port                 = "443"
+    protocol             = "HTTPS"
+    vpc_id               = "${var.vpc_id}"
+    deregistration_delay = 300
+    stickiness {
+        type            = "lb_cookie"
+        cookie_duration = 86400
+        enabled         = "true"
+    }
+    tags {
+        Name        = "${var.name}"
+        Project     = "${var.project}"
+        Purpose     = "Default target for secure HTTP traffic"
+        Creator     = "${var.creator}"
+        Environment = "${var.environment}"
+        Freetext    = "No instances typically get bound to this target"
+    }
+}
+
+resource "aws_lb_listener" "insecure_listener" {
+    load_balancer_arn = "${aws_lb.alb.arn}"
+    port              = "80"
+    protocol          = "HTTP"
+    default_action {
+       target_group_arn = "${aws_lb_target_group.default_insecure_target.arn}"
+       type             = "forward"
+    }
+}
+
+resource "aws_lb_listener" "secure_listener" {
+    load_balancer_arn = "${aws_lb.alb.arn}"
+    port              = "443"
+    protocol          = "HTTPS"
+    ssl_policy        = "${var.ssl_policy}"
+    certificate_arn   = "${var.certificate_arn}"
+    default_action {
+       target_group_arn = "${aws_lb_target_group.default_secure_target.arn}"
+       type             = "forward"
+    }
+}
