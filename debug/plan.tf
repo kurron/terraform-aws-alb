@@ -81,3 +81,11 @@ output "canonical_hosted_zone_id" {
 output "alb_zone_id" {
     value = "${module.alb.alb_zone_id}"
 }
+
+output "secure_listener_arn" {
+    value = "${module.alb.secure_listener_arn}"
+}
+
+output "insecure_listener_arn" {
+    value = "${module.alb.insecure_listener_arn}"
+}
