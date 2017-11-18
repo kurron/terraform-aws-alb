@@ -74,10 +74,6 @@ output "alb_dns_name" {
     value = "${module.alb.alb_dns_name}"
 }
 
-output "canonical_hosted_zone_id" {
-    value = "${module.alb.canonical_hosted_zone_id}"
-}
-
 output "alb_zone_id" {
     value = "${module.alb.alb_zone_id}"
 }

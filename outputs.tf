@@ -18,11 +18,6 @@ output "alb_dns_name" {
     description = "The DNS name of the load balancer."
 }
 
-output "canonical_hosted_zone_id" {
-    value = "${aws_lb.alb.canonical_hosted_zone_id}"
-    description = "The canonical hosted zone ID of the load balancer. "
-}
-
 output "alb_zone_id" {
     value = "${aws_lb.alb.zone_id}"
     description = "The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record)."
